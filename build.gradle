@@ -1,0 +1,44 @@
+buildscript {
+    ext { // 이 파일에서 사용할 전역변수를 설정하겠습니다.
+        springBootVersion = '2.1.7.RELEASE'
+
+        // 스프링 부트 그레이들 플러그인의 2.1.7릴리즈를 의존성으로 받겠다.
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+// 4개의 플러그인은 자바와 스프링 부트를 사용하려면 반드시 있어야 함
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+//plugins {
+//    id 'java'
+//}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories { // 각종 의존성(라이브러리)들을 어떤 원격 저장소에서 받을지 정함
+    // 저장소 중 하나, 라이브러리 업로드를 위해 많은 과정과 설명이 필요
+    mavenCentral()
+    // 위 저장소의 문제를 개선
+    jcenter()
+}
+
+dependencies {
+    // 여기서 버전을 쓰면 위에 작성한 버전을 못따라가니 주의!!
+    compile('org.springframework.boot:spring-boot-starter-web')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
+
+test {
+    useJUnitPlatform()
+}
