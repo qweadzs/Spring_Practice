@@ -23,6 +23,7 @@ before_deploy:
   - mv Spring_Practice.zip deploy/Spring_Practice.zip
 
 deploy:
+
   - provider: s3
     access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
     secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
@@ -34,6 +35,8 @@ deploy:
     wait-until-deployed: true
 
    - provider: codedeploy
+    on:
+      all_branches: true
     access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
     secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
     bucket: build-to-codedeploy # S3 버킷
